@@ -1,0 +1,92 @@
+<html>
+    <head></head>
+    <body>
+        <div class="kwadrat" style = "
+        border: 3px solid navy;
+        background-color: indianred;
+        ">cos tu jest</div>
+
+        <script>
+        // let element = document.querySelector(".kwadrat")
+        // // addEventListener(element)
+        // element.addEventListener('click', (event) => {
+        //     console.log ('wyswietl sie po kliknieciu')
+        //     console.log (event.pageX, event.pageY)
+        //     })
+        // element.addEventListener('mouseover', (event) => {
+        //     console.log ('wyswietl kiedy jest nad')
+        // })
+        // element.addEventListener('mouseup', (event) => {
+        //     console.log('to jest mouseup')
+        // })
+        // element.addEventListener('mousedown', (event) => {
+        //     console.log('a to jest mousedown')
+        // })
+        // element.addEventListener('mouseenter', (event) => {
+        //     console.log('to się wyswietli kiedy bedzie mouseenter')
+        // })  
+        // element.addEventListener('mousemove', (event) => {
+        //     console.log('taki to mousemove')
+        // }) 
+        // element.addEventListener('mouseleave', (event) => {
+        //     console.log('myszka opuszcza budynek')
+        // })
+        let kolo = document.querySelector('body')
+        startX = null
+        startY = null
+        endX = null
+        endY = null
+        kolo.addEventListener('mousedown', (event) => {
+            startX = event.pageX
+            startY = event.pageY
+            console.log (startX, startY)
+        })
+        kolo.addEventListener('mouseup', (event) => {
+            endX = event.pageX
+            endY = event.pageY
+            console.log (endX, endY)
+            if (endX > startX){
+            console.log(endX - startX)}
+            if (endY > startY){
+                console.log(endY - startY)
+            }
+            
+            
+        })
+
+        </script>
+
+
+        <script>
+            
+            // class Bubble {
+            //     constructor(x, y, r){ // x == 200, y == 300, r == 20 ; + zmienne sa lokalne
+            //         this.x = x  
+            //         this.y = y
+            //         this.r = r
+            //     }
+            //     move(){
+            //         this.x = this.x - random(-5, 5)
+            //         this.y = this.y - random(-5, 5)
+            //     }
+            //     draw(){
+            //         elippse(this.x,this.y,this.r,this.r)
+            //     }
+            // }
+
+            // let bubble1 = new Bubble(200,300,20);
+            // let bubble2 = new Bubble(205,305,25);
+
+
+            // function move(bubble){
+            //     if(bubble.x)
+            //         bubble.x = bubble.x + random(-5, 5);
+            //     if(bubble.y)
+            //         bubble.y = bubble.y + random(-5, 5);
+            // }
+            // move(bubble)
+
+        </script>
+
+    </body>
+</html>

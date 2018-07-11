@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>App</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/babel">
+
+class App extends React.Component{
+    constructor(props){
+        super();
+        this.state = {
+            counter: props.counter,
+            counter2: 0,
+            counter3: 0
+        };
+    }
+    render(){
+        return ( 
+            <div>
+                <button onClick={this.polaczenie}>+</button> <br />
+                <output>propsy: {this.props.counter} </output> <br />
+                <output onDoubleClick={this.mandarynka}>counter: {this.state.counter}</output> <br />
+                <output>counter2: {this.state.counter2}</output> <br />
+                <output>doubleclick: {this.state.counter3}</output> <br />
+                <button onClick={this.polaczenie2}>-</button> <br />
+            </div>
+        );
+    }
+
+    mandarynka = () => {
+        let nowaLiczba = this.state.counter3 + 2;
+        this.setState({
+            counter3: nowaLiczba
+        })
+    }
+
+    polaczenie2 = () => {
+        this.zmiejszLiczbe()
+        this.zliczanie()
+    }
+
+
+    polaczenie = () => {
+        this.zwiekszLiczbe()
+        this.zliczanie()
+    }
+
+
+    zliczanie = () => {
+        let newCouter2 = this.state.counter2 + 3;
+        this.setState({
+            counter2: newCouter2
+        })
+    }
+
+    zwiekszLiczbe = () => {
+        let newCounter = this.state.counter + 1; 
+        this.setState({ 
+            counter: newCounter
+        });
+    }
+
+    zmiejszLiczbe = () => {
+        let newCounter = this.state.counter - 1; 
+        this.setState({ 
+            counter: newCounter
+        });
+    }
+
+
+
+
+}
+
+  
+  ReactDOM.render(
+     <App counter={105}/>,
+     document.getElementById('app')
+  );
+        </script>
+    </body>
+</html>

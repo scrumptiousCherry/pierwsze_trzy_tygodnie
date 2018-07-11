@@ -1,0 +1,84 @@
+<html>
+    <head></head>
+    <body>
+        <div class="elemenecior" 
+            style="background: magenta; 
+                border:  1px solid; 
+                position: absolute; 
+                border-radius: 1000px; width: 0;">  
+        </div>
+
+        <script>
+            let element = document.querySelector('.elemenecior');
+
+            // element.addEventListener('click', () => {
+            //     console.log('Kliknieto na element')
+            // });
+            // element.addEventListener('dblclick', () => {
+            //     console.log('Kliknieto na element')
+            // });
+
+            // element.addEventListener('mouseenter', () => {
+            //     console.log('Wjechalem na elemnecior')
+            // });
+            // element.addEventListener('mouseleave', () => {
+            //     console.log('wypad z elemneciora')
+            // });
+            // element.addEventListener('mousemove', () => {
+            //     console.log('jestem nad elemenciore')
+            // });
+    
+            // element.addEventListener('mousedown', () => {
+            //     console.log('mouse down')
+            // });
+            // element.addEventListener('mouseup', () => {
+            //     console.log('mouse up')
+            // });
+
+            let body_element = document.querySelector('body');
+            let bubble = {
+                start_x: 0,
+                start_y: 0,
+                end_x: 0,
+                end_y: 0,
+
+                isPressed: false
+            };
+
+            body_element.addEventListener('mousedown', (event) => {
+                bubble.start_x = event.pageX;
+                bubble.start_y = event.pageY;
+                bubble.isPressed = true;
+            });
+            body_element.addEventListener('mousemove', (event) => {
+                if(bubble.isPressed){
+                    bubble.end_x = event.pageX;
+                    bubble.end_y = event.pageY;
+                    draw()
+                }
+            });
+            body_element.addEventListener('mouseup', (event) => {
+                if(bubble.isPressed){
+                    bubble.end_x = event.pageX;
+                    bubble.end_y = event.pageY;
+                    bubble.isPressed = false;
+                    draw();
+                }
+            });
+            function draw(){
+                let width = 0;
+                if(bubble.end_x > bubble.start_x){
+                    width = bubble.end_x - bubble.start_x;
+                }
+                let height = 0;
+                if(bubble.end_y > bubble.start_y){
+                    height = bubble.end_y - bubble.start_y;
+                }
+                element.style.top = bubble.start_y;
+                element.style.left = bubble.start_x;
+                element.style.width = width;
+                element.style.height = height;
+            }
+        </script>
+    </body>
+</html>

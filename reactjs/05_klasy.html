@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pierwszy komponent w react js</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/babel">
+
+            // class Osoba{
+            //     name = null;
+            //     dataUrodzenia = null;
+            //     constructor(imie, dataUrodzenia){
+            //         this.name = imie;
+            //         this.dataUrodzenia = dataUrodzenia;
+            //     } 
+            //     pobierzAdresObrazkaNaPodstawieImienia(){
+            //         let obrazek;
+            //         if(this.name == "Wiki"){
+            //             obrazek = "https://ocdn.eu/pulscms-transforms/1/l3YktkpTURBXy81NGUzMjMzMjU3MjE3YmJhMDVkYzVjNTFkY2IxNzQ2ZS5qcGeRkwIAzQHk";
+            //         }else if(this.name =="Robuchna"){
+            //             obrazek = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Darica_Lion_07174.jpg/180px-Darica_Lion_07174.jpg'
+            //         }else if(this.name == 'Tomek'){
+            //             obrazek = "https://ocdn.eu/pulscms-transforms/1/l3YktkpTURBXy81NGUzMjMzMjU3MjE3YmJhMDVkYzVjNTFkY2IxNzQ2ZS5qcGeRkwIAzQHk";
+            //         }else{
+            //             obrazek = 'https://img-ovh-cloud.zszywka.pl/0/0294/8587-maly-gepard.jpg';
+            //         }
+            //         return obrazek;
+            //     }
+            //     pobierzWiek(){
+            //         this.dataUrodzenia // wylicz date urodzienia
+            //     }
+            // }
+
+            // let zmienna = new Osoba('Wiki');
+            // console.log(zmienna.pobierzAdresObrazkaNaPodstawieImienia());
+
+function Input({ name, validate }){
+    console.log("W INPUCIE MAMY: ", name)
+    let wartosc_z_inputa = ''; // pobieram wartosc z tagu input
+    let wynik_sprawdzenia = validate[0](wartosc_z_inputa) // true lub false
+    let komunikat_dla_uzytkownika;
+    if(wynik_sprawdzenia == true){
+        komunikat_dla_uzytkownika = (<div>jest git </div>)
+    }else{
+        komunikat_dla_uzytkownika = (<div>jest blad popraw</div>)
+    }
+    return (
+        <div>
+            <input type="text" />
+            <div>{komunikat_dla_uzytkownika}<div>
+        <div>
+    )
+}
+
+class MyForm extends React.Component{    
+    render() {
+        return (
+            <Input name="nip" validate={[this.validateInput]} />
+        )
+    }
+
+    validateInput(value){
+        return value && value.length === 10;
+    }
+}
+
+
+
+function MojKomponent({title = "modal", content}){
+    return (
+        <div>
+            <MyForm />
+        </div>
+    );   
+}
+  
+  ReactDOM.render(
+     <div> 
+      <MojKomponent 
+        />
+     </div>,
+     document.getElementById('app')
+  );
+        </script>
+    </body>
+</html>

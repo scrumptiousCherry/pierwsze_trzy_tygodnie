@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pierwszy komponent w react js</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/babel">
+
+// function Przycisk(){
+//     return (
+//         <button onClick={
+//                 (event) => { 
+//                     alert('kliknieto');
+//                     // console.log(event.pageX, event.pageY) 
+//                 } 
+//         }>
+//             Kliknij mnieeeeee
+//         </button>
+//     );    
+// }
+
+class Przycisk extends React.Component {
+    render(){
+        return (
+            <button onClick={this.onClickHandler}
+                    onMouseDown={this.onEvent}
+                    onMouseUp={this.onEvent}
+                    onMouseMove={this.onEvent}
+                    onMouseEnter={this.onEvent}
+                    onMouseLeave={this.onEvent}>
+                Kliknij mnie
+            </button>
+        )
+    }
+    onEvent(event){
+        console.log('EVENT::: ', event.pageX, event.pageY);
+    }
+
+    onClickHandler(event) {
+        console.log('eeeeeevent', event.pageX, event.pageY);
+        alert('Kliknieeeeetooooo')
+    }
+}
+
+function App(){
+    return (
+        <div>
+            <Przycisk />
+        </div>
+    );   
+}
+  
+ReactDOM.render(
+    <App />,
+    document.getElementById('app')
+);
+        </script>
+    </body>
+</html>

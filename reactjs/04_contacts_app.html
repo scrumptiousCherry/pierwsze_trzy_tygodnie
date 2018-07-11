@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pierwszy komponent w react js</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+    
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+
+        <style>
+        .ui.list{
+            margin-top: 50px !important;
+        }
+
+        div{
+            color: red;
+        }
+        #test{ color: blue; }
+        .test1{ color: yellow; }
+        div#test.test1{ color: darkmagenta; }
+        #test.test1{ color: navy; }
+        .test1.test2.test3{ color: orange; }
+
+
+        </style>
+
+    </head>
+    <body>
+        
+        
+        <div id="app"></div>
+
+        <div id="test" class="test1 test2 test3">
+            tekts
+        </div>
+<script type="text/babel">
+function AppHeader(){
+    return (  
+        <header className="ui fixed menu">
+            <nav className="ui container">
+                <a href="#" className="header item">
+                    Lista kontaktow
+                </a>
+                <div className="header item">
+                    <button className="ui button">
+                        Dodaj
+                    </button>
+                </div>
+            </nav> 
+        </header>
+    );
+}
+
+function ContactsList(){
+    return (
+        <ul className="ui bulleted list">
+            <ContactItem 
+                login="typeofweb1"
+                name="Wiki"
+                department="javascript developer"
+            />
+            <ContactItem 
+                login="typeofweb2"
+                name="Anetka"
+                department="javascript developer"
+            />
+        </ul>
+    )
+}
+
+function ContactItem({ login, name, department }){
+    // props == { login: "typeofweb1", name: "Wiki"}
+    
+    // const login = props.login;
+    // const name = props.name;
+    // const department = props.department;
+    
+    // const { login, name, department } = props;
+    
+    const imgUrl = 'https://api.adorable.io/avatars/55/' + login +'.png';
+    return (
+        <li className="item ">
+            <img src={imgUrl} className="ui mini circular image" />
+            <div className="content">
+                <h4 className="header">{name}</h4>
+                <div className="description">{department}</div>
+            </div>
+        </li>
+    );
+}
+
+function App(){
+    return (
+        <div>
+            <AppHeader />
+            <main className="ui main text container">
+                <ContactsList />
+            </main>
+        </div>
+    );
+}
+
+
+ReactDOM.render(
+    <App />,
+    document.getElementById('app')
+);
+</script>
+    </body>
+</html>
