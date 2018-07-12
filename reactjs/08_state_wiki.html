@@ -8,79 +8,48 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
     </head>
     <body>
+        <style>
+        .btn{
+            height: 100px;
+            width: 250px;
+            background: rgb(203,96,179);
+            background: -moz-linear-gradient(45deg, rgba(203,96,179,1) 0%, rgba(203,96,179,1) 24%, rgba(203,96,179,1) 41%, rgba(193,70,161,1) 50%, rgba(203,96,179,1) 59%, rgba(203,96,179,1) 79%, rgba(219,54,164,1) 100%);
+            background: -webkit-linear-gradient(45deg, rgba(203,96,179,1) 0%,rgba(203,96,179,1) 24%,rgba(203,96,179,1) 41%,rgba(193,70,161,1) 50%,rgba(203,96,179,1) 59%,rgba(203,96,179,1) 79%,rgba(219,54,164,1) 100%);
+            background: linear-gradient(45deg, rgba(203,96,179,1) 0%,rgba(203,96,179,1) 24%,rgba(203,96,179,1) 41%,rgba(193,70,161,1) 50%,rgba(203,96,179,1) 59%,rgba(203,96,179,1) 79%,rgba(219,54,164,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cb60b3', endColorstr='#db36a4',GradientType=1 );
+            border: 2px double blueviolet;
+        }
+        </style>
         <div id="app"></div>
         <script type="text/babel">
 
 class App extends React.Component{
-    constructor(props){
-        super();
+    constructor(){
+        super()
         this.state = {
-            counter: props.counter,
-            counter2: 0,
-            counter3: 0
-        };
+        kwadrat : 0
+        }
     }
     render(){
         return ( 
             <div>
-                <button onClick={this.polaczenie}>+</button> <br />
-                <output>propsy: {this.props.counter} </output> <br />
-                <output onDoubleClick={this.mandarynka}>counter: {this.state.counter}</output> <br />
-                <output>counter2: {this.state.counter2}</output> <br />
-                <output>doubleclick: {this.state.counter3}</output> <br />
-                <button onClick={this.polaczenie2}>-</button> <br />
+               <button className = "btn" onMouseLeave = {this.mierzenie} onMouseEnter = {this.mierzenie}></button>
+               <output>{this.state.kwadrat}</output>
             </div>
         );
     }
-
-    mandarynka = () => {
-        let nowaLiczba = this.state.counter3 + 2;
-        this.setState({
-            counter3: nowaLiczba
-        })
+    mierzenie = () => {
+        let malsEnter = this.state.kwadrat + 1
+        this.setState ({
+            kwadrat : malsEnter
+        }) 
     }
-
-    polaczenie2 = () => {
-        this.zmiejszLiczbe()
-        this.zliczanie()
-    }
-
-
-    polaczenie = () => {
-        this.zwiekszLiczbe()
-        this.zliczanie()
-    }
-
-
-    zliczanie = () => {
-        let newCouter2 = this.state.counter2 + 3;
-        this.setState({
-            counter2: newCouter2
-        })
-    }
-
-    zwiekszLiczbe = () => {
-        let newCounter = this.state.counter + 1; 
-        this.setState({ 
-            counter: newCounter
-        });
-    }
-
-    zmiejszLiczbe = () => {
-        let newCounter = this.state.counter - 1; 
-        this.setState({ 
-            counter: newCounter
-        });
-    }
-
-
-
 
 }
 
-  
+
   ReactDOM.render(
-     <App counter={105}/>,
+     <App/>,
      document.getElementById('app')
   );
         </script>

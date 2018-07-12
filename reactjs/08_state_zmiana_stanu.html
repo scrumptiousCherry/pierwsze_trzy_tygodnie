@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>App</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/babel">
+
+class Zmiana extends React.Component{
+    constructor(){
+        super ()
+        this.state = {
+            wartosc1 : "wiki",
+            wartosc2 : "zenek"
+        }
+    }
+    zmiana_imienia = () => {
+        this.setState({
+            wartosc1 : "puszin",
+            wartosc2 : "kotek"
+        })
+    }    
+    render(){
+        return(
+            <div onClick = {this.zmiana_imienia}>{this.state.wartosc1}{this.state.wartosc2}</div>
+
+        );
+    }
+    
+}
+  
+  ReactDOM.render(
+     <Zmiana />,
+     
+     document.getElementById('app')
+  );
+        </script>
+    </body>
+</html>

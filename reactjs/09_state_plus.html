@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>App</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/babel">
+
+    class App extends React.Component{
+        constructor(){
+            super()
+            this.state ={
+                imie : "",
+                nazwisko : ""
+            }
+        }
+        reakcjaNaZmianeInputa = (event) => {
+            console.log (event.target.value)
+            let nowa_wartosc = event.target.value
+            this.setState ({
+                imie : nowa_wartosc
+            })
+        }
+        reakcjaNaZmianeInputa2 = (event) => {
+            console.log (event.target.value)
+            let nowa_wartosc = event.target.value
+            this.setState ({
+                nazwisko : nowa_wartosc
+            })
+        }
+        render(){
+        return(
+            <div>
+                <input type = {'text'} onChange = {this.reakcjaNaZmianeInputa}/><h1>{this.state.imie}</h1>
+                <input type = {'text'} onChange = {this.reakcjaNaZmianeInputa2}/><h2>{this.state.nazwisko}</h2>
+            </div>
+        );
+        }
+    }
+
+
+  ReactDOM.render(
+     <App />,
+     document.getElementById('app')
+  );
+        </script>
+    </body>
+</html>

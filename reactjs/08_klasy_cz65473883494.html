@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>App</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+    </head>
+    <body>
+        <style>
+        .btn{
+            background-color: background: rgb(169,3,41);
+            background: -moz-linear-gradient(left, rgba(169,3,41,1) 0%, rgba(4,211,197,1) 0%, rgba(143,2,34,1) 44%, rgba(181,3,98,1) 77%, rgba(109,0,25,1) 100%);
+            background: -webkit-linear-gradient(left, rgba(169,3,41,1) 0%,rgba(4,211,197,1) 0%,rgba(143,2,34,1) 44%,rgba(181,3,98,1) 77%,rgba(109,0,25,1) 100%);
+            background: linear-gradient(to right, rgba(169,3,41,1) 0%,rgba(4,211,197,1) 0%,rgba(143,2,34,1) 44%,rgba(181,3,98,1) 77%,rgba(109,0,25,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=1 );
+            width: 250px;
+            height: 100px;
+
+        }
+        </style>
+        <div id="app"></div>
+        <script type="text/babel">
+
+
+
+class Auto extends React.Component{
+    constructor(){
+        super()
+        this.state = {
+            kolor : "zielony",
+            maksymalnaPredkosc : 120
+        }
+    }
+    zmienna = () => {
+        console.log('Bylo:', this.state.kolor)
+        this.setState(
+            {
+                kolor : "chabrowy",
+                maksymalnaPredkosc : 150
+            }, 
+            () => {
+                console.log("Teraz po zmianie", this.state.kolor)
+            }
+        )
+        console.log('po zmianie:', this.state.kolor)
+        // this.setState((prevState) => {
+        //     let nowaWartosc = prevState.counter + 1;
+        //     return { 
+        //         kolor : "chabrowy",
+        //         maksymalnaPredkosc : 150
+        //     }
+        // }) 
+    }
+    render(){
+        return(
+            <button onClick = {(this.zmienna)} className = {"btn"}>{this.state.kolor}{this.state.maksymalnaPredkosc} km/h</button>
+        );
+    }
+}
+
+  
+  ReactDOM.render(
+     <Auto />,
+     document.getElementById('app')
+  );
+        </script>
+    </body>
+</html>
