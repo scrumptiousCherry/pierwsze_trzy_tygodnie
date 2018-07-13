@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {} from 'react';
 import './App.css';
 
 /**
@@ -12,10 +12,10 @@ class App extends React.Component{
       constructor(){
         super()
         this.state = {
-          czyZablokowany : false,
           isStartVisible : true,
-          czyKlikniety : false,
           isKoniecVisible : false,
+          czyKlikniety : false,
+          czyZablokowany : false,
           czyPokazacEkranGlowny : false,
           isGracz1Visible : false,
           isGracz2Visible : false,
@@ -34,23 +34,6 @@ class App extends React.Component{
           })
         }else{}
       }
-      renderPoKliknieciu = () => {
-        if(this.state.isKoniecVisible === false){
-          return( // TO JEST WYSWIETLANE NA SAMYM POCZATKU GRY
-            <div>
-              <h3>Aby rozpoczac gre kliknij start</h3>
-            </div>
-          ); 
-        }else{
-            return( // TO JEST WYSWIETLANE PO KLIKNIECIU NA START
-              <div>
-                {this.renderPrzyciski()}
-                <button onClick = {this.PoKliknieciuNaKoniec}>koniec</button>
-                <h3>Aby zakonczyc gre kliknij koniec</h3>
-              </div>
-            );
-        }
-      }
       EkranGry = () => {
         this.setState ({
           czyPokazacEkranGlowny : true,
@@ -68,6 +51,44 @@ class App extends React.Component{
           turaGracza1 : false,
           turaGracza2 : true
         })
+      }
+      zmianaTury = () => {
+        if(this.state.turaGracza1 === true){
+          this.setState ({
+            turaGracza2 : true,
+            turaGracza1 : false
+          })
+        }else{
+          this.setState ({
+            turaGracza1 : true,
+            turaGracza2 : false
+          })
+        }
+      }
+      PoKliknieciuNaKoniec = () => {
+        if(this.state.isStartVisible === true)
+          this.setState({
+            isKoniecVisible : false,
+            czyZablokowany : false,
+            czyPokazacEkranGlowny : false
+          })
+      }
+      renderPoKliknieciu = () => {
+        if(this.state.isKoniecVisible === false){
+          return( // TO JEST WYSWIETLANE NA SAMYM POCZATKU GRY
+            <div>
+              <h3>Aby rozpoczac gre kliknij start</h3>
+            </div>
+          ); 
+        }else{
+            return( // TO JEST WYSWIETLANE PO KLIKNIECIU NA START
+              <div>
+                {this.renderPrzyciski()}
+                <button onClick = {this.PoKliknieciuNaKoniec}>koniec</button>
+                <h3>Aby zakonczyc gre kliknij koniec</h3>
+              </div>
+            );
+        }
       }
       renderPrzyciski = () => {
         if(this.state.isGracz1Visible === true && this.state.isGracz2Visible === true){
@@ -103,28 +124,7 @@ class App extends React.Component{
           );
         }
       }
-      zmianaTury = () => {
-        if(this.state.turaGracza1 === true){
-          this.setState ({
-            turaGracza2 : true,
-            turaGracza1 : false
-          })
-        }else{
-          this.setState ({
-            turaGracza1 : true,
-            turaGracza2 : false
-          })
-        }
-      }
-      PoKliknieciuNaKoniec = () => {
-        if(this.state.isStartVisible === true)
-          this.setState({
-            isKoniecVisible : false,
-            czyZablokowany : false,
-            czyPokazacEkranGlowny : false
-          })
-      
-      }
+
       render(){
         return(
           <div>
@@ -133,8 +133,7 @@ class App extends React.Component{
             {this.renderEkranGry()}
           </div>
         );
-      }
-      
+      }      
 }
 
 export default App;
