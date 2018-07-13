@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>App</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/babel">
+
+class App extends React.Component{
+    constructor(){
+        super()
+        this.state = {
+            isPageHomeVisible: false,
+            isPageAboutVisible: false,
+            isPageContactVisible: false
+        }
+    }
+    showPageHome = ()  => {
+        this.setState({
+            isPageHomeVisible: true,
+            isPageAboutVisible: false,
+            isPageContactVisible: false
+        })
+    }
+    showPageAbout = ()  => {
+        this.setState({
+            isPageHomeVisible: false,
+            isPageAboutVisible: true,
+            isPageContactVisible: false
+        })
+    }
+    showPageContact = ()  => {
+        this.setState({
+            isPageHomeVisible: false,
+            isPageAboutVisible: false,
+            isPageContactVisible: true
+        })
+    }
+    
+    renderImage = () => {
+        if(this.state.isPageHomeVisible){
+            return (
+                <div>
+                    <p>https://www.youtube.com/watch?v=uBbSvn79zO4</p>
+                    <img src="https://www.youtube.com/watch?v=uBbSvn79zO4"/>
+                    <a href="https://www.youtube.com/watch?v=uBbSvn79zO4">LINK</a>
+                    <iframe width="560" height="315"  src="file:///E:/code/reactjs/09_state_plus.html"></iframe>
+                    <iframe width="560" height="315"  src="https://typeofweb.com/2018/01/18/metody-cyklu-zycia-komponentu-react-js/"></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/uBbSvn79zO4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+            );
+        }
+        if(this.state.isPageContactVisible){
+            return (<img src={"https://api.adorable.io/avatars/150/contact.png"}/>);  
+        }
+        if(this.state.isPageAboutVisible){
+            return (<img src={"https://api.adorable.io/avatars/150/about.png"}/>);  
+        }
+    }
+
+    render(){
+        return (
+            <div>
+                <button onClick={this.showPageHome}> Strona glowna</button>
+                <button onClick={this.showPageAbout}> Strona o nas</button>
+                <button onClick={this.showPageContact}> Strona kontaktowa</button>
+                {this.renderImage()}
+            </div>
+        );
+    }
+}
+
+  ReactDOM.render(
+     <App />,
+     document.getElementById('app')
+  );
+        </script>
+    </body>
+</html>

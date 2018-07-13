@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>App</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+
+class App extends React.Component{
+    constructor(){
+        super()
+        this.state = {
+            wylosowanaLiczba : parseInt(Math.random()*10),
+            czyLiczbaJestWieksza : false,
+            czyLiczbaJestMniejsza : false,
+            czyLiczbaJestRowna : false,
+            czyToJestLiczba : true
+        }
+    }
+    renderText = () => {
+        if(this.state.czyLiczbaJestWieksza == true){
+            return (
+                <div>liczba podana przez ciebie jest wieksza od wylosowanej</div>
+            );
+        }
+        if(this.state.czyLiczbaJestRowna == true){
+            return(
+                <div>zgadles liczbe</div>
+            );
+        }
+        if(this.state.czyLiczbaJestMniejsza == true){
+            return(
+                <div>liczba podana przez ciebie jest mniejsza od wylosowanej liczby</div>
+            );
+        }
+        if(this.state.czyToJestLiczba == false){
+            return(
+                <div>podales zla wartosc</div>
+            );
+        }
+
+    }
+    sprawdzInput = (event) => {
+        let wartoscInputa = event.target.value 
+        if (wartoscInputa == this.state.wylosowanaLiczba){
+            this.setState ({
+            czyLiczbaJestRowna : true,
+            czyLiczbaJestMniejsza : false,
+            czyLiczbaJestWieksza : false,
+            czyToJestLiczba : true
+            })
+        }
+        if (wartoscInputa > this.state.wylosowanaLiczba){
+            this.setState ({
+                czyLiczbaJestWieksza : true,
+                czyLiczbaJestMniejsza : false,
+                czyLiczbaJestRowna : false,
+                czyToJestLiczba : true
+            })
+        }
+        if (wartoscInputa < this.state.wylosowanaLiczba){
+            this.setState ({
+                czyLiczbaJestMniejsza : true,
+                czyLiczbaJestRowna : false,
+                czyLiczbaJestWieksza : false,
+                czyToJestLiczba : true
+            })
+        }
+        if (wartoscInputa == ""){
+            this.setState ({
+                czyLiczbaJestMniejsza: false,
+                czyLiczbaJestRowna: false,
+                czyLiczbaJestWieksza: false,
+            })
+        }
+        if (isNaN(wartoscInputa) == true){
+            this.setState ({
+                czyLiczbaJestMniejsza: false,
+                czyLiczbaJestRowna: false,
+                czyLiczbaJestWieksza: false,
+                czyToJestLiczba : false
+        })
+        }
+
+    }
+
+    render(){
+        return (
+           <div>
+                <h1>To jest gra zgadnij liczbe</h1>
+                <input onChange = {this.sprawdzInput}/>
+                {this.renderText()}
+           </div> 
+        );
+    }
+}
+
+  ReactDOM.render(
+     <App />,
+     document.getElementById('app')
+  );
+        </script>
+</body>
+
+</html>
