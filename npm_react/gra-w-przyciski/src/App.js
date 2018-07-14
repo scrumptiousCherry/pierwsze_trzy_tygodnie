@@ -1,6 +1,7 @@
 import React, {} from 'react';
 import './App.css';
 
+
 /**
  * potrzebuje klasy ktora bedzie miala:
  * przycisk start ktory bedzie:
@@ -20,7 +21,10 @@ class App extends React.Component{
           isGracz1Visible : false,
           isGracz2Visible : false,
           turaGracza1 : false,
-          turaGracza2 : false
+          turaGracza2 : false,
+          left : 50,
+          top : 150
+
         }
       }
       jesliKlikniety = (event) =>{
@@ -73,6 +77,15 @@ class App extends React.Component{
             czyPokazacEkranGlowny : false
           })
       }
+      zmienPozycje = (event) => {
+        this.setState ({
+          left : this.getRandomInt(500),
+          top: this.getRandomInt(500)
+        })
+      }
+      getRandomInt = (max) => {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
       renderPoKliknieciu = () => {
         if(this.state.isKoniecVisible === false){
           return( // TO JEST WYSWIETLANE NA SAMYM POCZATKU GRY
@@ -128,6 +141,10 @@ class App extends React.Component{
       render(){
         return(
           <div>
+            <button  
+            style = {{ 'position' : 'absolute',
+              'left' : this.state.left , 'top' : this.state.top}} 
+            onMouseEnter = {this.zmienPozycje}>Kliknij mie :))</button>
             <button onClick = {this.jesliKlikniety} disabled = {this.state.czyZablokowany}>start</button>
             {this.renderPoKliknieciu()}
             {this.renderEkranGry()}
