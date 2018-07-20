@@ -17,7 +17,8 @@ class App extends Component {
       poziomAktywny : 0,
       czyWygrana: 0,
       listaPrzyciskow: pudelkoPrzyciskow,
-      maxPoziom: 11
+      maxPoziom: 11,
+      wersjaGry: 'v.0.1.0.[2018.20.07]'
       
     }
   }
@@ -146,7 +147,7 @@ class App extends Component {
   }
   nastepnyPoziom = (kliknietyIndex) => {
     console.log(kliknietyIndex)
-    let czyPrzegrana = Math.random() < 0.1
+    let czyPrzegrana = Math.random() < 0.25
     if(czyPrzegrana === true){
       let nowaListaPrzyciskow = this.state.listaPrzyciskow.slice()
       nowaListaPrzyciskow.forEach((item, index) => {
@@ -191,6 +192,10 @@ class App extends Component {
         {this.wyswietlPrzyciskKoniec()}
         {this.wyswietlKomunikatWygrana()}
         {this.wyswietlListePrzycisow()}
+        <div style = 
+        {{ 'font-size' : 10, 'position': 'absolute', 'right' : 5, 'bottom' :2, 'color': '#CCC'}}>
+          {this.state.wersjaGry}
+        </div>
       </div>
     );
   }
