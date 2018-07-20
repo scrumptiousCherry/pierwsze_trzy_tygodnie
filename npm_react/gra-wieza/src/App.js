@@ -1,5 +1,22 @@
-import React, { Component } from 'react';
+/*
+STYLOWANIE 
+ZLICZANIE KWOTY WYGRANEJ:
+DWA NOWE KLUCZE W STATE: WARTOSC Z INPUTA PO KLIKNIECIU START, KWOTA WYGRANEJ 
+(ZMIENIA SIE PO KLIKNIECIU W NASTEPNY POZIOM),
+WYGLAD LISTY WYNIKOW
+RILIS
+KURS NA EGGHEAD ES6
+zrobic nowy folder do testow
+dev dependencies w package jason
+src setuptests
+zainstalowac skype
+*/
 import './App.css';
+
+import moment from 'moment';
+import React, { Component } from 'react';
+
+moment.locale('pl');
 
 class App extends Component {
   constructor(){
@@ -18,18 +35,69 @@ class App extends Component {
       czyWygrana: 0,
       listaPrzyciskow: pudelkoPrzyciskow,
       maxPoziom: 11,
-      wersjaGry: 'v.0.1.0.[2018.20.07]'
+      wersjaGry: 'v.0.1.0.[2018.20.07]',
+      numerId: 100,
+      listaWynikow: [
+        {
+          id: 1,
+          poziomZakonczenia : 4,
+          kwotaZagrana : 1.00,
+          kwotaWygrana: 100.00,
+          zysk: 100.00 - 1.00,
+          czyWygrana: true,
+          data: moment().format('LLLL')
+        },
+        {
+          id: 2,
+          poziomZakonczenia : 1,
+          kwotaZagrana : 5.00,
+          kwotaWygrana: 0.00,
+          zysk: 0.00 - 5.00,
+          czyWygrana: false,
+          data: moment().format('LLLL')
+        }
+      ],
+      komunikatBledu: '',
+      wartoscInputa: ''
       
     }
   }
+  wyswietlListeWynikow = () => {
+    return (
+      <div>
+      Lista Wynikow:
+        {this.state.listaWynikow.map((x, index) => {
+          let czyWygranaTekst = ''
+          if(x.czyWygrana === true){
+            czyWygranaTekst = 'TAK'
+          }
+          if(x.czyWygrana === false){
+            czyWygranaTekst = 'NIE'
+          }
+          return(
+          <div>
+            'id : '{x.id},
+            'poziomZakonczenia' : {x.poziomZakonczenia},
+            'kwotaWygrana' : {x.kwotaWygrana},
+            'kwotaZagrana' : {x.kwotaZagrana},
+            'czy Wygrana' : {czyWygranaTekst}
+          </div>
+        );
+        })
+        }
+      </div>
+    );
+  }
+
   wyswietlListePrzycisow = () => {
     return(
-      <div style = {{'width' : 64}}>
+      <div style = {{'width' : 450}}>
         {this.state.listaPrzyciskow.map((x, index)=>  {
-          let styleDisplay = {'display' : 'inline-block'}
+          let styleDisplay = {'display' : 'inline-block','width' : 150}
           if(index === 2 || index === 6 || index === 9){
             styleDisplay = {
-              'display' : 'inline-block'
+              'display' : 'inline-block',
+              'width' : 150
             }
           }
           return( 
@@ -37,6 +105,7 @@ class App extends Component {
               <button 
                 disabled = {!x.czyAktywny}
                 onClick = {() => this.nastepnyPoziom(index)}
+                style = {{'width': '100%'}}
               >{x.tekstPrzycisku}</button>
             </div>
           );
@@ -118,31 +187,67 @@ class App extends Component {
     }
   }
   rozpocznijGre = () => {
-    let nowaListaPrzyciskow = this.state.listaPrzyciskow.slice()
-    nowaListaPrzyciskow.forEach((item, index) =>{
-      if(index < 3){
-        nowaListaPrzyciskow[index].czyAktywny=true
-      }
-    })
-    nowaListaPrzyciskow.forEach((item, index) => {
-      nowaListaPrzyciskow[index].tekstPrzycisku = '*'
-    })
-    this.setState({
-      czyGraRozpoczeta : 1,
-      poziomAktywny : 1,
-      czyWygrana : 0,
-      listaPrzyciskow : nowaListaPrzyciskow
-    }) 
+    if(this.state.wartoscInputa === ''){
+      this.setState({
+        komunikatBledu: 'podaj wartosc',
+        czyGraRozpoczeta: 0,
+        poziomAktywny : 0
+      })
+    }else{
+      // nowaListaPrzyciskow.forEach((item, index) => {
+        // nowaListaPrzyciskow[index].tekstPrzycisku = '*'
+      // })
+      let nowaListaPrzyciskow = this.state.listaPrzyciskow.slice()
+      nowaListaPrzyciskow.forEach((item, index) =>{
+        if(index < 3){
+          nowaListaPrzyciskow[index].czyAktywny=true
+        }
+      })
+      this.setState({
+        czyGraRozpoczeta : 1,
+        poziomAktywny : 1,
+        czyWygrana : 0,
+        listaPrzyciskow : nowaListaPrzyciskow,
+        wartoscInputa: ''
+      })
+    } 
   }
   zakonczGre = () => {
     let nowaListaPrzyciskow = this.state.listaPrzyciskow.slice()
     nowaListaPrzyciskow.forEach((item, index) => {
       nowaListaPrzyciskow[index].tekstPrzycisku = '*'
+      nowaListaPrzyciskow[index].czyAktywny= false
+    })
+    let Idd = this.state.numerId + 1
+    let nowaListaWynikow = this.state.listaWynikow.slice()
+    let okreslenieWygranej = () => {
+      if(this.state.czyWygrana === 1){
+        return (
+          false
+        );
+      }else{
+        return (
+          true
+        );
+      }
+    }
+    console.log(okreslenieWygranej())
+    nowaListaWynikow.push({
+          id: this.state.numerId,
+          poziomZakonczenia : this.state.poziomAktywny,
+          kwotaZagrana : parseFloat(this.state.wartoscInupta),
+          kwotaWygrana: 60.00,
+          zysk: 60.00 - 7.00,
+          czyWygrana: okreslenieWygranej(),
+          data: moment().format('LLLL')
     })
     this.setState({
       czyGraRozpoczeta: 0,
       poziomAktywny: 0,
-      czyWygrana : 0
+      czyWygrana : 0,
+      listaWynikow : nowaListaWynikow,
+      listaPrzyciskow : nowaListaPrzyciskow,
+      numerId : Idd
     })
   }
   nastepnyPoziom = (kliknietyIndex) => {
@@ -152,7 +257,7 @@ class App extends Component {
       let nowaListaPrzyciskow = this.state.listaPrzyciskow.slice()
       nowaListaPrzyciskow.forEach((item, index) => {
         nowaListaPrzyciskow[index].czyAktywny = false;
-        nowaListaPrzyciskow[index].tekstPrzycisku = '*'
+        // nowaListaPrzyciskow[index].tekstPrzycisku = '*'
       })
       nowaListaPrzyciskow[kliknietyIndex].tekstPrzycisku = '-'
       this.setState ({
@@ -162,7 +267,7 @@ class App extends Component {
     }else{
       let nowyStan = this.state.poziomAktywny + 1
       let nowaListaPrzyciskow = this.state.listaPrzyciskow.slice()
-      nowaListaPrzyciskow[kliknietyIndex].tekstPrzycisku = '`'
+      // nowaListaPrzyciskow[kliknietyIndex].tekstPrzycisku = '`'
       nowaListaPrzyciskow.forEach((item, index) => {
         let poczatek = 3*(nowyStan - 1)
         let koniec = poczatek + 2
@@ -184,14 +289,51 @@ class App extends Component {
       }
     }
   }
+  sprawdzenieInputa = (event) => {
+    let wartoscZInupta = event.target.value
+    if(wartoscZInupta === '' || isNaN(wartoscZInupta)){
+      let nowyTekstNaPrzyciskach = this.state.listaPrzyciskow.slice()
+      nowyTekstNaPrzyciskach.forEach((x, index) => {
+        nowyTekstNaPrzyciskach[index].tekstPrzycisku = '*'
+      })
+      this.setState({
+        komunikatBledu : 'musisz wprowadzic liczbe',
+        listaPrzyciskow : nowyTekstNaPrzyciskach,
+        wartoscInputa : wartoscZInupta
+      })
+    }else{
+      let nowyTekstNaPrzyciskach = this.state.listaPrzyciskow.slice()
+      nowyTekstNaPrzyciskach.forEach((x, index) => {
+        let aktualnyPoziom = (parseInt(index / 3) + 1)
+        let nowaLiczba = (aktualnyPoziom * (1.3 * parseFloat(wartoscZInupta)))
+        let nowaLiczbaZaokraglona = Math.round(nowaLiczba * 100) / 100
+        nowyTekstNaPrzyciskach[index].tekstPrzycisku = nowaLiczbaZaokraglona
+      })
+      this.setState ({
+        komunikatBledu : '',
+        listaPrzyciskow : nowyTekstNaPrzyciskach,
+        wartoscInputa: wartoscZInupta
+      })
+    }
+  }
+  wyswietlKomunikatBledu = (event) => {
+    return(
+      <div>
+      <input onChange = {this.sprawdzenieInputa} value = {this.state.wartoscInputa}/>
+      {this.state.komunikatBledu}
+      </div>
+    );
+  }
   render(){
     return(
       <div>
         {/* {this.wyswietlPrzyciski()} */}
+        {this.wyswietlKomunikatBledu()}
         {this.wyswietlPrzyciskStart()}
         {this.wyswietlPrzyciskKoniec()}
         {this.wyswietlKomunikatWygrana()}
         {this.wyswietlListePrzycisow()}
+        {this.wyswietlListeWynikow()}
         <div style = 
         {{ 'font-size' : 10, 'position': 'absolute', 'right' : 5, 'bottom' :2, 'color': '#CCC'}}>
           {this.state.wersjaGry}
