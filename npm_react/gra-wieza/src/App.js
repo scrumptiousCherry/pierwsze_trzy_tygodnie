@@ -146,7 +146,7 @@ class App extends Component {
   }
   nastepnyPoziom = (kliknietyIndex) => {
     console.log(kliknietyIndex)
-    let czyPrzegrana = Math.random() < 0.33
+    let czyPrzegrana = Math.random() < 0.1
     if(czyPrzegrana === true){
       let nowaListaPrzyciskow = this.state.listaPrzyciskow.slice()
       nowaListaPrzyciskow.forEach((item, index) => {
