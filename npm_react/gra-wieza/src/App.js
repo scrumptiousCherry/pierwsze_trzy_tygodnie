@@ -16,7 +16,6 @@ import moment from 'moment';
 import React, { Component } from 'react';
 moment.locale('pl');
 
-
 class App extends Component {
   constructor(){
     super()
@@ -60,9 +59,7 @@ class App extends Component {
       wartoscInputa: '',
       przechowywanieZInputa : '',
       kwotaWygranej : 0,
-      
-      kolorTekstu: 'rgba(0, 0, 0, 0.6)'
-    }
+      }
   }
   wyswietlListeWynikow = () => {
     return (
@@ -128,7 +125,8 @@ class App extends Component {
         'width' : 450,
         'position' : 'absolute',
         'left' : 250,
-        'top' : 50,
+        'top' : 100,
+        'backgroundColor' : 'white'
         }}>
         {this.state.listaPrzyciskow.map((x, index)=>  {
           let styleDisplay = {'display' : 'inline-block','width' : 150}
@@ -145,7 +143,12 @@ class App extends Component {
                 onClick = {() => this.nastepnyPoziom(index)}
                 style = {{
                   'width': '100%',
-                  'backgroundColor' : '#feee7d'
+                  'backgroundColor' : '#feee7d',
+                  'border': 'none',
+                  'padding' : 10,
+                  'borderRadius' : 8,
+                  'margin' : 5,
+                  'margin-left' : 5
                 }}
               >{x.tekstPrzycisku}</button>
             </div>
@@ -215,7 +218,18 @@ class App extends Component {
   wyswietlPrzyciskKoniec = () =>{
     if(this.state.czyGraRozpoczeta === 1){
       return(
-        <button onClick = {this.zakonczGre}>KONIEC</button>
+        <button 
+          onClick = {this.zakonczGre}
+          style = {{
+            'backgroundColor' : '#feee7d',
+            'border': 'none',
+            'color': 'light gray',
+            'padding': 10,
+            'margin' : 10,
+            'position' : 'absolute',
+            'left' : 70,
+            'top' : 115
+        }}>KONIEC</button>
   
       );
     }
@@ -223,7 +237,19 @@ class App extends Component {
   wyswietlPrzyciskStart = () => {
     if(this.state.czyGraRozpoczeta === 0){
       return(
-        <button onClick = {this.rozpocznijGre}>START</button>
+        <button 
+        onClick = {this.rozpocznijGre}
+        style = {{
+          'backgroundColor' : '#feee7d',
+          'border': 'none',
+          'color': 'light gray',
+          'padding': 10,
+          'margin' : 10,
+          'position' : 'absolute',
+          'left' : 70,
+          'top' : 115
+
+        }}>START</button>
       );
     }
   }
@@ -376,7 +402,23 @@ class App extends Component {
   wyswietlKomunikatBledu = (event) => {
     return(
       <div>
-      <input onChange = {this.sprawdzenieInputa} value = {this.state.wartoscInputa}/>
+      <input 
+      onChange = {this.sprawdzenieInputa} 
+      value = {this.state.wartoscInputa}
+      style = {{
+        'border' : 'none',
+        'background-color' : '#feee7d',
+        'color' : 'light gray',
+        'margin' : 10,
+        'height' : 30,
+        'text-align' : 'center',
+        'position' : 'absolute',
+        'left' : 50,
+        'top' : 70
+        // 'top' : 100
+      }}
+      placeholder = 'wprowadz liczbe :)'
+      />
       {this.state.komunikatBledu}
       </div>
     );
