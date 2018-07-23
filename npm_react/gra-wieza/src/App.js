@@ -1,8 +1,8 @@
 /*
 STYLOWANIE 
 ZLICZANIE KWOTY WYGRANEJ:
-DWA NOWE KLUCZE W STATE: {done :[WARTOSC Z INPUTA PO KLIKNIECIU START]}, KWOTA WYGRANEJ 
-(ZMIENIA SIE PO KLIKNIECIU W NASTEPNY POZIOM),
+done done done ::: [DWA NOWE KLUCZE W STATE: WARTOSC Z INPUTA PO KLIKNIECIU START, KWOTA WYGRANEJ 
+(ZMIENIA SIE PO KLIKNIECIU W NASTEPNY POZIOM)],
 WYGLAD LISTY WYNIKOW
 RILIS
 KURS NA EGGHEAD ES6
@@ -12,10 +12,8 @@ src setuptests
 zainstalowac skype
 */
 import './App.css';
-
 import moment from 'moment';
 import React, { Component } from 'react';
-
 moment.locale('pl');
 
 
@@ -27,7 +25,7 @@ class App extends Component {
       pudelkoPrzyciskow.push({
         id: i,
         czyAktywny: false,
-        tekstPrzycisku: '*'
+        tekstPrzycisku: '*',
       })
     }
     this.state= {
@@ -61,29 +59,60 @@ class App extends Component {
       komunikatBledu: '',
       wartoscInputa: '',
       przechowywanieZInputa : '',
-      kwotaWygranej : 0
+      kwotaWygranej : 0,
       
+      kolorTekstu: 'rgba(0, 0, 0, 0.6)'
     }
   }
   wyswietlListeWynikow = () => {
     return (
-      <div>
+      <div
+      style = {{
+        'font-size' : 16,
+        'fontFamily': 'Lora',
+        
+      }}>
+      <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet"></link>
       Lista Wynikow:
+      <br/> <br/>
         {this.state.listaWynikow.map((x, index) => {
           let czyWygranaTekst = ''
           if(x.czyWygrana === true){
-            czyWygranaTekst = 'TAK'
+            czyWygranaTekst = 'Tak'
           }
           if(x.czyWygrana === false){
-            czyWygranaTekst = 'NIE'
+            czyWygranaTekst = 'Nie'
           }
           return(
-          <div>
-            id : {x.id},
-            poziomZakonczenia : {x.poziomZakonczenia},
-            kwotaWygrana : {x.kwotaWygrana},
-            kwotaZagrana : {x.kwotaZagrana},
-            czy Wygrana : {czyWygranaTekst}
+          <div style = {{
+            'font-size' : 14,
+            'fontFamily' : 'Lora',
+            // 'display' : 'flex',
+            // 'msFlexDirection' : 'column',
+            // 'justifyContent' : 'flex-end'
+          }}>
+            Gracz nr {x.id}:
+            <br/>
+            Poziom zakonczenia gry : 
+            <br/>
+            {x.poziomZakonczenia},
+            <br/>
+            Wysokosc kwoty wygranej : 
+            <br/>
+            {x.kwotaWygrana},
+            <br/>
+            Wysokosc kwoty zagranej : 
+            <br/>
+            {x.kwotaZagrana},
+            <br/>
+            Wysokosc zysku : 
+            <br/>
+            {x.zysk},
+            <br/>
+            Czy gracz wygral? : 
+            <br/>
+            {czyWygranaTekst}
+            <br/><br/>
           </div>
         );
         })
@@ -92,9 +121,15 @@ class App extends Component {
     );
   }
 
+  
   wyswietlListePrzycisow = () => {
     return(
-      <div style = {{'width' : 450}}>
+      <div style = {{
+        'width' : 450,
+        'position' : 'absolute',
+        'left' : 250,
+        'top' : 50,
+        }}>
         {this.state.listaPrzyciskow.map((x, index)=>  {
           let styleDisplay = {'display' : 'inline-block','width' : 150}
           if(index === 2 || index === 6 || index === 9){
@@ -108,7 +143,10 @@ class App extends Component {
               <button 
                 disabled = {!x.czyAktywny}
                 onClick = {() => this.nastepnyPoziom(index)}
-                style = {{'width': '100%'}}
+                style = {{
+                  'width': '100%',
+                  'backgroundColor' : '#feee7d'
+                }}
               >{x.tekstPrzycisku}</button>
             </div>
           );
@@ -240,7 +278,8 @@ class App extends Component {
           poziomZakonczenia : this.state.poziomAktywny,
           kwotaZagrana : parseFloat(this.state.przechowywanieZInputa),
           kwotaWygrana: this.state.kwotaWygranej,
-          zysk: 60.00 - 7.00,
+          zysk: this.state.kwotaWygranej - 
+          parseFloat(this.state.przechowywanieZInputa),
           czyWygrana: okreslenieWygranej(),
           data: moment().format('LLLL')
     })
