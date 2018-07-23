@@ -18,6 +18,7 @@ import React, { Component } from 'react';
 
 moment.locale('pl');
 
+
 class App extends Component {
   constructor(){
     super()
@@ -58,7 +59,9 @@ class App extends Component {
         }
       ],
       komunikatBledu: '',
-      wartoscInputa: ''
+      wartoscInputa: '',
+      przechowywanieZInputa : '',
+      kwotaWygranej : 0
       
     }
   }
@@ -208,7 +211,7 @@ class App extends Component {
         poziomAktywny : 1,
         czyWygrana : 0,
         listaPrzyciskow : nowaListaPrzyciskow,
-        wartoscInputa: ''
+        wartoscInputa: '',
       })
     } 
   }
@@ -235,7 +238,7 @@ class App extends Component {
     nowaListaWynikow.push({
           id: this.state.numerId,
           poziomZakonczenia : this.state.poziomAktywny,
-          kwotaZagrana : parseFloat(this.state.wartoscInupta),
+          kwotaZagrana : parseFloat(this.state.przechowywanieZInputa),
           kwotaWygrana: 60.00,
           zysk: 60.00 - 7.00,
           czyWygrana: okreslenieWygranej(),
@@ -313,7 +316,15 @@ class App extends Component {
         komunikatBledu : '',
         listaPrzyciskow : nowyTekstNaPrzyciskach,
         wartoscInputa: wartoscZInupta
+        
       })
+    }
+    if(this.state.czyGraRozpoczeta === 0){
+      let wartoscInputaPoKliknieciuStart = event.target.value
+      this.setState({
+        przechowywanieZInputa : wartoscInputaPoKliknieciuStart
+      })
+
     }
   }
   wyswietlKomunikatBledu = (event) => {
