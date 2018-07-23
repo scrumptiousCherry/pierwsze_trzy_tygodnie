@@ -36,7 +36,7 @@ class App extends Component {
       czyWygrana: 0,
       listaPrzyciskow: pudelkoPrzyciskow,
       maxPoziom: 11,
-      wersjaGry: 'v.0.1.0.[2018.20.07]',
+      wersjaGry: 'v.0.2.0.[2018.23.07]',
       numerId: 100,
       listaWynikow: [
         {
