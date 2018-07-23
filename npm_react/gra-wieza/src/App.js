@@ -1,7 +1,7 @@
 /*
 STYLOWANIE 
 ZLICZANIE KWOTY WYGRANEJ:
-DWA NOWE KLUCZE W STATE: WARTOSC Z INPUTA PO KLIKNIECIU START, KWOTA WYGRANEJ 
+DWA NOWE KLUCZE W STATE: {done :[WARTOSC Z INPUTA PO KLIKNIECIU START]}, KWOTA WYGRANEJ 
 (ZMIENIA SIE PO KLIKNIECIU W NASTEPNY POZIOM),
 WYGLAD LISTY WYNIKOW
 RILIS
@@ -79,11 +79,11 @@ class App extends Component {
           }
           return(
           <div>
-            'id : '{x.id},
-            'poziomZakonczenia' : {x.poziomZakonczenia},
-            'kwotaWygrana' : {x.kwotaWygrana},
-            'kwotaZagrana' : {x.kwotaZagrana},
-            'czy Wygrana' : {czyWygranaTekst}
+            id : {x.id},
+            poziomZakonczenia : {x.poziomZakonczenia},
+            kwotaWygrana : {x.kwotaWygrana},
+            kwotaZagrana : {x.kwotaZagrana},
+            czy Wygrana : {czyWygranaTekst}
           </div>
         );
         })
@@ -239,7 +239,7 @@ class App extends Component {
           id: this.state.numerId,
           poziomZakonczenia : this.state.poziomAktywny,
           kwotaZagrana : parseFloat(this.state.przechowywanieZInputa),
-          kwotaWygrana: 60.00,
+          kwotaWygrana: this.state.kwotaWygranej,
           zysk: 60.00 - 7.00,
           czyWygrana: okreslenieWygranej(),
           data: moment().format('LLLL')
@@ -276,6 +276,13 @@ class App extends Component {
         let koniec = poczatek + 2
         if(index >= poczatek && index <= koniec){
           nowaListaPrzyciskow[index].czyAktywny=true
+          let nowaListaPrzyciskow2 = this.state.listaPrzyciskow.slice()
+              nowaListaPrzyciskow2.forEach((item, index) => {
+              let wartoscWygranej = nowaListaPrzyciskow2[kliknietyIndex].tekstPrzycisku
+                this.setState({
+                  kwotaWygranej : wartoscWygranej
+                })
+                })
         }else{
           nowaListaPrzyciskow[index].czyAktywny=false
         }
