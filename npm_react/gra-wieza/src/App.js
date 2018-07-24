@@ -33,8 +33,8 @@ class App extends Component {
       czyWygrana: 0,
       listaPrzyciskow: pudelkoPrzyciskow,
       maxPoziom: 11,
-      wersjaGry: 'v.0.4.0.[2018.24.07]',
-      numerId: 100,
+      wersjaGry: 'v.0.5.0.[2018.24.07]',
+      numerId: 10,
       listaWynikow: [
         {
           id: 1,
@@ -84,13 +84,17 @@ class App extends Component {
     return (
       <div
       style = {{
+        'position' : 'absolute',
+        'left' : 740,
+        'top' : 10,
         'font-size' : 16,
         'fontFamily': 'Lora',
-        
+        'fontWeight' : 'normal',
+
       }}>
       <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet"></link>
       Lista Wynikow:
-      <br/> <br/>
+      <br/>
         {this.state.listaWynikow.map((x, index) => {
           let czyWygranaTekst = ''
           if(x.czyWygrana === true){
@@ -103,11 +107,12 @@ class App extends Component {
           <div style = {{
             'font-size' : 14,
             'fontFamily' : 'Lora',
+            'fontWeight' : 'normal'
             // 'display' : 'flex',
             // 'msFlexDirection' : 'column',
             // 'justifyContent' : 'flex-end'
           }}>
-            Gracz nr {x.id}:
+            {/* Gracz nr {x.id}:
             <br/>
             Poziom zakonczenia gry : 
             <br/>
@@ -128,7 +133,35 @@ class App extends Component {
             Czy gracz wygral? : 
             <br/>
             {czyWygranaTekst}
-            <br/><br/>
+ */}
+
+          <table
+          style = {{
+            // 'position' : 'relative',
+            'width' : 590,
+            'left' : 740,
+            'top' : 10,
+            'font-size' : 16,
+            'fontFamily': 'Lora',
+            'fontWeight' : 'normal'
+          }}>
+            <tr>
+              <th>id</th>
+              <th>poziom zakonczenia gry</th>
+              <th>ile wygrano</th>
+              <th>ile zagrano</th>
+              <th>jaki zysk</th>
+              <th>czy gracz wygral?</th>
+            </tr>
+            <tr>
+              <th>{x.id}</th>
+              <th>{x.poziomZakonczenia}</th>
+              <th>{x.kwotaWygrana}</th>
+              <th>{x.kwotaZagrana}</th>
+              <th>{x.zysk}</th>
+              <th>{czyWygranaTekst}</th>
+            </tr>
+          </table>
           </div>
         );
         })
@@ -238,14 +271,13 @@ class App extends Component {
         <button 
           onClick = {this.zakonczGre}
           style = {{
-            'backgroundColor' : '#feee7d',
-            'border': 'none',
-            'color': '#6b6b6b',
-            'padding': 10,
-            'margin' : 10,
-            'position' : 'absolute',
-            'left' : 25,
-            'top' : 75
+          'backgroundColor' : '#ffdb4d',
+          'border': 'none',
+          'color': '#6b6b6b',
+          'padding': 10,
+          'position' : 'absolute',
+          'left' : 127,
+          'top' : 230
         }}>KONIEC</button>
   
       );
@@ -257,15 +289,13 @@ class App extends Component {
         <button 
         onClick = {this.rozpocznijGre}
         style = {{
-          'backgroundColor' : '#feee7d',
+          'backgroundColor' : '#ffdb4d',
           'border': 'none',
           'color': '#6b6b6b',
           'padding': 10,
-          'margin' : 10,
           'position' : 'absolute',
-          'left' : 25,
-          'top' : 75
-
+          'left' : 127,
+          'top' : 230
         }}>START</button>
       );
     }
@@ -321,8 +351,8 @@ class App extends Component {
           poziomZakonczenia : this.state.poziomAktywny,
           kwotaZagrana : parseFloat(this.state.przechowywanieZInputa),
           kwotaWygrana: this.state.kwotaWygranej,
-          zysk: this.state.kwotaWygranej - 
-          parseFloat(this.state.przechowywanieZInputa),
+          zysk: parseFloat(this.state.kwotaWygranej - 
+          parseFloat(this.state.przechowywanieZInputa)),
           czyWygrana: okreslenieWygranej(),
           data: moment().format('LLLL')
     })
@@ -426,12 +456,12 @@ class App extends Component {
         'border' : 'none',
         'background-color' : '#feee7d',
         'color' : '#6b6b6b',
-        'margin' : 10,
+        // 'margin' : 10,
         'height' : 30,
         'text-align' : 'center',
         'position' : 'absolute',
-        'left' : 25,
-        'top' : 20
+        'left' : 20,
+        'top' : 170
       }}
       placeholder = 'wprowadz liczbe :)'
       />
