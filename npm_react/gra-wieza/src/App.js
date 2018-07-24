@@ -33,7 +33,7 @@ class App extends Component {
       czyWygrana: 0,
       listaPrzyciskow: pudelkoPrzyciskow,
       maxPoziom: 11,
-      wersjaGry: 'v.0.3.0.[2018.23.07]',
+      wersjaGry: 'v.0.4.0.[2018.24.07]',
       numerId: 100,
       listaWynikow: [
         {
@@ -126,8 +126,7 @@ class App extends Component {
         'position' : 'absolute',
         'left' : 250,
         'top' : 100,
-        'backgroundColor' : 'white'
-        }}>
+      }}>
         {this.state.listaPrzyciskow.map((x, index)=>  {
           let styleDisplay = {'display' : 'inline-block','width' : 150}
           if(index === 2 || index === 6 || index === 9){
@@ -146,9 +145,8 @@ class App extends Component {
                   'backgroundColor' : '#feee7d',
                   'border': 'none',
                   'padding' : 10,
-                  'borderRadius' : 8,
-                  'margin' : 5,
-                  'margin-left' : 5
+                  'borderRadius' : 2,
+                  'margin-top' : 10,      
                 }}
               >{x.tekstPrzycisku}</button>
             </div>
@@ -223,12 +221,12 @@ class App extends Component {
           style = {{
             'backgroundColor' : '#feee7d',
             'border': 'none',
-            'color': 'light gray',
+            'color': '#6b6b6b',
             'padding': 10,
             'margin' : 10,
             'position' : 'absolute',
-            'left' : 70,
-            'top' : 115
+            'left' : 25,
+            'top' : 75
         }}>KONIEC</button>
   
       );
@@ -242,12 +240,12 @@ class App extends Component {
         style = {{
           'backgroundColor' : '#feee7d',
           'border': 'none',
-          'color': 'light gray',
+          'color': '#6b6b6b',
           'padding': 10,
           'margin' : 10,
           'position' : 'absolute',
-          'left' : 70,
-          'top' : 115
+          'left' : 25,
+          'top' : 75
 
         }}>START</button>
       );
@@ -408,14 +406,13 @@ class App extends Component {
       style = {{
         'border' : 'none',
         'background-color' : '#feee7d',
-        'color' : 'light gray',
+        'color' : '#6b6b6b',
         'margin' : 10,
         'height' : 30,
         'text-align' : 'center',
         'position' : 'absolute',
-        'left' : 50,
-        'top' : 70
-        // 'top' : 100
+        'left' : 25,
+        'top' : 20
       }}
       placeholder = 'wprowadz liczbe :)'
       />
