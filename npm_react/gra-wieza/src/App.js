@@ -61,6 +61,25 @@ class App extends Component {
       kwotaWygranej : 0,
       }
   }
+  wyswietlPowitanie = () => {
+    return(
+      <div
+      style = {{
+        'width' : 450,
+        'position' : 'absolute',
+        'left' : 250,
+        'top' : 10,
+        'font-size' : 18,
+        'fontFamily' : 'Lora',
+        'textAlign' : 'justify'
+      }}>
+        Witaj w grze w jeża :) twoim zadaniem jest wybrac kwote, ktora chcesz zagrac,
+        a nastepnie dotrzec na sam koniec wiezy, by zyskac jak najwiecej :)
+        <br/>
+        Powodzenia!
+      </div>
+    );
+  }
   wyswietlListeWynikow = () => {
     return (
       <div
@@ -424,6 +443,7 @@ class App extends Component {
     return(
       <div>
         {/* {this.wyswietlPrzyciski()} */}
+        {this.wyswietlPowitanie()}
         {this.wyswietlKomunikatBledu()}
         {this.wyswietlPrzyciskStart()}
         {this.wyswietlPrzyciskKoniec()}
