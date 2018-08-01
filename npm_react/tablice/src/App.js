@@ -55,6 +55,7 @@ class App extends Component {
               'left' : 100,
               'width' : 250
             }}
+            key = {x.tablicaRejestracyjna}
             >
               <h3
               style = {{
