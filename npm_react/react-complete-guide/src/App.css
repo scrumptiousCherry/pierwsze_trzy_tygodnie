@@ -1,3 +1,11 @@
 .App {
   text-align: center;
 }
+
+.pink{
+  color: pink;
+}
+
+.color{
+  background-color: blueviolet;
+}
