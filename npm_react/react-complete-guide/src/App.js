@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
  
 
@@ -69,15 +69,15 @@ class App extends Component {
 
     const klasy = [];
     if(this.state.persons.length <=2){
-      klasy.push('pink')
+      klasy.push(classes.pink)
     }
     if(this.state.persons.length <=1){
-      klasy.push('color')
+      klasy.push(classes.color)
     }
 
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm a React App</h1>
         <p className={klasy.join(' ')}>This is really working!</p>
         <button 
