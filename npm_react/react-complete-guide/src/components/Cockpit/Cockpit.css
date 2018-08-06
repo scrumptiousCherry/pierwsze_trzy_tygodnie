@@ -1,0 +1,26 @@
+.pink{
+    color: pink;
+  }
+  
+  .color{
+    background-color: blueviolet;
+  }
+  .Cockpit button {
+    border: 2px dotted antiquewhite;
+    padding: 15px;
+    background-color:  darkkhaki;
+    font: inherit;
+    color: darkslategray;
+    cursor: progress;
+  }
+  .Cockpit button:hover {
+    background-color: aquamarine;
+    color: deeppink;
+  }
+  .Cockpit button.Pink{
+    background-color: orchid;
+  }
+  .Cockpit button.Pink:hover{
+    background-color: pink;
+    color: black
+  }
