@@ -4,14 +4,18 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-  state = {
-    persons: [
-      {id: 'gakraw', name : 'Max', age: 28},
-      {id: 'fdfhjgh', name: 'Manu', age: 26},
-      {id: 'safgy', name: 'Stephanie', age: 26}
-    ],
-    otherState: 'some other value',
-    showPersons : false
+  constructor(props){
+    super(props);
+    this.state = {
+      persons: [
+        {id: 'gakraw', name : 'Max', age: 28},
+        {id: 'fdfhjgh', name: 'Manu', age: 26},
+        {id: 'safgy', name: 'Stephanie', age: 26}
+      ],
+      otherState: 'some other value',
+      showPersons : false,
+      buttonClicked: 0
+    }
   }
   deletePersonHandler = (personIndex) => {
     // const persons = this.state.persons.slice();
@@ -38,7 +42,12 @@ class App extends Component {
   }
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow});
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !doesShow,
+        buttonClicked: prevState.buttonClicked + 1}
+      
+    });
   }
 
   render() {
