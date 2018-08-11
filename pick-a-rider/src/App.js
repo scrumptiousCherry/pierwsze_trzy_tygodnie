@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './Button.css'
+import './App.css'
+import styl from './StyleDlaReszty.css'
+
 
 class App extends Component {
   state = {
@@ -22,27 +25,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <button 
+      <div>
+      <div className={styl.Tekst}>Wylosuj motocyklistę:</div>
+        <button
+          className={classes.Button}
           onClick={this.pickARiderHandler}
-          style={{
-            backgroundColor : '#abdf6f',
-            border :'0.16em solid rgba(255,255,255,0)',
-            display: 'block',
-            padding:'10px',
-            
-            borderRadius: '3px',
-            boxSizing: 'border-box',
-            textDecoration:'none',
-            fontFamily:'Roboto',
-            fontWeight: 300,
-            fontSize: '20px',
-            color: '#FFFFFF',
-            textShadow: '0 0.04em 0.04em rgba(0,0,0,0.35)',
-            transition: 'all 0.2'
-          }}
-          >PICK A RIDER</button>
-        <div>
+          >LOSUJĘ!</button>
+        <div className={styl.Divv}>
           {this.state.yourRider}
         </div>
       </div>
