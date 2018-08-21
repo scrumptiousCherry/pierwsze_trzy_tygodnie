@@ -49,9 +49,9 @@ export const auth = (email, password, isSignup) => {
             password: password,
             returnSecureToken: true
         };
-        let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyBcYGTMwaCa_F80ZjYuRWARMFi3oDk_V9c'
+        let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key={kluczFirebase}'
         if (!isSignup){
-            url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBcYGTMwaCa_F80ZjYuRWARMFi3oDk_V9c'
+            url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key={kluczFirebase}'
         }
         axios.post(url, authData)
             .then(response => {
