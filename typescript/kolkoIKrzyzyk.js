@@ -10,6 +10,7 @@ var Game = /** @class */ (function () {
         this.pola = new Array(9);
         this.moznaGrac = false;
         this.koniecGry = false;
+        this.remis = false;
         this.czyjaKolej = KolkoKrzyzyk.kolko;
     }
     Game.prototype.czyWygranaLubRemis = function () {
@@ -55,26 +56,39 @@ var Game = /** @class */ (function () {
                 }
             }
         }
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', czyWygranaFlaga);
         if (czyWygranaFlaga == 'tak') {
             this.przerwanieGry();
         }
         else {
-            var wszystkoZajete = this.pola.every(function (x) {
-                if (x == KolkoKrzyzyk.kolko || x == KolkoKrzyzyk.krzyzyk) {
-                    return false;
-                }
-                else {
+            var czySaSameUnd = this.pola.every(function (x) {
+                if (x == undefined) {
                     return true;
                 }
+                else {
+                    return false;
+                }
             });
-            console.log('?????', wszystkoZajete);
-            console.log('POLA:', this.pola);
-            if (wszystkoZajete == true) {
-                this.przerwanieGry();
+            if (czySaSameUnd == true) {
+                this.zmienTure();
             }
             else {
-                this.zmienTure();
+                var czyIstniejePoleDoZagrania = false;
+                for (var i = 0; i < this.pola.length; i++) {
+                    var x = this.pola[i];
+                    if (x == KolkoKrzyzyk.kolko) {
+                        continue;
+                    }
+                    if (x == KolkoKrzyzyk.krzyzyk) {
+                        continue;
+                    }
+                    czyIstniejePoleDoZagrania = true;
+                }
+                if (czyIstniejePoleDoZagrania == true) {
+                    this.zmienTure();
+                }
+                else {
+                    this.rozpocznijRemis();
+                }
             }
         }
     };
@@ -88,7 +102,6 @@ var Game = /** @class */ (function () {
         else {
             this.czyjaKolej = KolkoKrzyzyk.krzyzyk;
         }
-        console.log('czyja kolej:', this.czyjaKolej);
     };
     Game.prototype.przerwanieGry = function () {
         //pojawi modal, ktory zasloni gre zebby nie mozna bylo 
@@ -132,6 +145,10 @@ var Game = /** @class */ (function () {
             }
         }
     };
+    Game.prototype.rozpocznijRemis = function () {
+        this.remis = true;
+        this.przerwanieGry();
+    };
     Game.prototype.rozpocznijGre = function () {
         //@todo: bedzie wyzerowywac ustawienia, ustawienie flagi moznaGrac na true
         //1. ustawienie nowego arraya
@@ -145,11 +162,23 @@ var Game = /** @class */ (function () {
     return Game;
 }());
 exports.Game = Game;
-var game = new Game();
-game.rozpocznijGre();
+// let game = new Game()
+// game.rozpocznijGre()
 // game.wykonajRuch(3)
 // game.wykonajRuch(4)
-game.wykonajRuch(0);
+// game.wykonajRuch(0)
 // game.wykonajRuch(1)
 // game.wykonajRuch(7)
 // game.wykonajRuch(8)
+var given = new Game();
+given.rozpocznijGre(); //x
+given.wykonajRuch(0); //x
+given.wykonajRuch(1); //o
+given.wykonajRuch(2); //x
+given.wykonajRuch(3); //o
+given.wykonajRuch(4); //x
+given.wykonajRuch(8); //o
+given.wykonajRuch(7); //x
+given.wykonajRuch(6); //o
+given.wykonajRuch(5); //x
+console.log(given);

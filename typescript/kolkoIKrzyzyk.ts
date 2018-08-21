@@ -3,6 +3,7 @@ export class Game{
     pola:Array<string>= new Array(9)
     moznaGrac:boolean= false
     koniecGry:boolean = false
+    remis:boolean = false
 
     czyjaKolej:KolkoKrzyzyk = KolkoKrzyzyk.kolko
     czyWygranaLubRemis(){
@@ -58,19 +59,41 @@ export class Game{
         if(czyWygranaFlaga == 'tak'){
             this.przerwanieGry()
         }else{
-            let wszystkoZajete = this.pola.every((x) => {
-                if(x == KolkoKrzyzyk.kolko || x == KolkoKrzyzyk.krzyzyk){
-                    return false
-                }else{
+            let czySaSameUnd = this.pola.every((x) => {
+                if(x == undefined){
                     return true
+                }else{
+                    return false
+                }
+            })
+
+            
+            
+            
+            if(czySaSameUnd == true){
+                this.zmienTure()
+            }else{
+                let czyIstniejePoleDoZagrania = false
+                for(let i = 0; i< this.pola.length; i++){
+                    let x = this.pola[i]
+                    if(x == KolkoKrzyzyk.kolko){
+                        continue;
+                    }
+                    if(x == KolkoKrzyzyk.krzyzyk){
+                        continue;
+                    }
+                    czyIstniejePoleDoZagrania = true
+                }
+
+
+                if(czyIstniejePoleDoZagrania == true){
+                    this.zmienTure()
+                }else{
+                    this.rozpocznijRemis()
                 }
                 
-            })
-            
-            if(wszystkoZajete == true){
-                this.przerwanieGry()
-            }else{
-                this.zmienTure()
+                
+
             }
 
         }
@@ -135,6 +158,10 @@ export class Game{
             }
         }
     }
+    rozpocznijRemis(){
+        this.remis=true
+        this.przerwanieGry()
+    }
     rozpocznijGre(){
         //@todo: bedzie wyzerowywac ustawienia, ustawienie flagi moznaGrac na true
         //1. ustawienie nowego arraya
@@ -157,3 +184,18 @@ export class Game{
 // game.wykonajRuch(1)
 // game.wykonajRuch(7)
 // game.wykonajRuch(8)
+
+
+// let given = new Game()
+// given.rozpocznijGre() //x
+//     given.wykonajRuch(0) //x
+//     given.wykonajRuch(1) //o
+//     given.wykonajRuch(2) //x
+//     given.wykonajRuch(3)//o
+//     given.wykonajRuch(4)//x
+//     given.wykonajRuch(8)//o
+//     given.wykonajRuch(7)//x
+//     given.wykonajRuch(6)//o
+//     given.wykonajRuch(5)//x
+
+//     console.log(given)

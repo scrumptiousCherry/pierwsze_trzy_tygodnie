@@ -43,6 +43,52 @@ it('dodanie znaku na polu i sprawdzenie dzialania metody zmienTure', () => {
 })
 
 
-it('zakonczenie gry', () => {
+it('zakonczenie gry kiedy jest wygrana', () => {
+let given = new Game()
+let spyOnKoniecGry = jest.spyOn( given,'przerwanieGry')
+let spyOnRemis = jest.spyOn(given, 'rozpocznijRemis')
+given.rozpocznijGre()
+given.wykonajRuch(0)
+// expect(spyOnRemis).toBeCalled()
+// expect(spyOnKoniecGry).not.toBeCalled()
+given.wykonajRuch(4)
+// expect(spyOnKoniecGry).not.toBeCalled()
+given.wykonajRuch(1)
+// expect(spyOnKoniecGry).not.toBeCalled()
+given.wykonajRuch(5)
+// expect(spyOnKoniecGry).not.toBeCalled()
+given.wykonajRuch(2)
+// expect(spyOnKoniecGry).toBeCalled()
+expect(given).toHaveProperty('koniecGry', true)
+expect(given.pola[0]).toEqual(KolkoKrzyzyk.krzyzyk)
+expect(given.pola[1]).toEqual(KolkoKrzyzyk.krzyzyk)
+expect(given.pola[2]).toEqual(KolkoKrzyzyk.krzyzyk)
+expect(spyOnKoniecGry).toBeCalled()
+})
 
+
+it('zakonczenie gry kiedy jest remis', () => {
+    let given = new Game()
+    let SpyOnRemis = jest.spyOn(given, 'czyWygranaLubRemis')
+    let spyOnKoniecGry = jest.spyOn(given, 'przerwanieGry')
+    let spyOnRozpocznijRemis = jest.spyOn(given, 'rozpocznijRemis')
+    let spyOnZmienTure = jest.spyOn(given, 'zmienTure')
+    given.rozpocznijGre() //x
+    given.wykonajRuch(0) //x
+    given.wykonajRuch(1) //o
+    given.wykonajRuch(2) //x
+    given.wykonajRuch(3)//o
+    given.wykonajRuch(4)//x
+    given.wykonajRuch(8)//o
+    given.wykonajRuch(7)//x
+    given.wykonajRuch(6)//o
+    given.wykonajRuch(5)//x
+    expect(given.pola[8]).toEqual(KolkoKrzyzyk.kolko)
+    expect(spyOnZmienTure).toBeCalled()
+    expect(given).toHaveProperty('remis', true)
+
+    expect(SpyOnRemis).toBeCalled()
+    // expect(spyOnKoniecGry).toBeCalled()
+    expect(spyOnRozpocznijRemis).toBeCalled()
+    
 })
