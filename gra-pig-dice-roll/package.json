@@ -1,0 +1,15 @@
+{
+  "name": "gra-pig-dice-roll",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "testcafe chrome testy.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "testcafe": "^0.21.1",
+    "typescript": "^3.0.1"
+  }
+}

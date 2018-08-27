@@ -1,0 +1,313 @@
+<html>
+<head>
+
+<script src="./index.js"></script>
+
+<style>
+    /* tu jest jedno oczko (1) */
+    .liczba-pol-1 div:nth-child(1){
+        opacity: 1;
+        top: 35px;
+        left: 48px;
+    }
+    /* tu sa dwa oczka (2) */
+    .liczba-pol-2 div:nth-child(1) {
+        opacity: 1;
+        top: 0px;
+        left:  20px;
+    }
+    .liczba-pol-2 div:nth-child(2){
+        opacity: 1;
+        bottom: 10px;
+        right: 20px;
+    }
+    /* tu sa trzy oczka (3) */
+    .liczba-pol-3 div:nth-child(1){
+        opacity: 1;
+        top: 0px;
+        left:  20px;
+    }
+    .liczba-pol-3 div:nth-child(2){
+        opacity: 1;
+        top: 33px;
+        left: 46px;
+    }
+    .liczba-pol-3 div:nth-child(3){
+        opacity: 1;
+        bottom: 10px;
+        right: 20px;
+    }
+    /* tu sa cztery oczka (4) */
+    .liczba-pol-4 div:nth-child(1){
+        opacity: 1;
+        top: 0px;
+        left:  20px;
+    }
+    .liczba-pol-4 div:nth-child(2){
+        opacity: 1;
+        top: 0px;
+        right:  20px;
+    }
+    .liczba-pol-4 div:nth-child(3){
+        opacity: 1;
+        bottom: 10px;
+        left: 20px;
+    }
+    .liczba-pol-4 div:nth-child(4){
+        opacity: 1;
+        bottom: 10px;
+        right: 20px;
+    }
+    /* tu jest piec oczek (5) */
+    .liczba-pol-5 div:nth-child(1){
+        opacity: 1;
+        top: 0px;
+        left:  20px;
+    }
+    .liczba-pol-5 div:nth-child(2){
+        opacity: 1;
+        top: 35px;
+        left: 48px;
+    }
+    .liczba-pol-5 div:nth-child(3){
+        opacity: 1;
+        bottom: 10px;
+        right: 20px;
+    }
+    .liczba-pol-5 div:nth-child(4){
+        opacity: 1;
+        top: 0px;
+        right:  20px;
+    }
+    .liczba-pol-5 div:nth-child(5){
+        opacity: 1;
+        bottom: 10px;
+        left: 20px;
+    }
+    /* tu jest szesc oczek (6) */
+    .liczba-pol-6 div:nth-child(1){
+        opacity: 1;
+        top: 0px;
+        left:  20px;
+    }
+    .liczba-pol-6 div:nth-child(2){
+        opacity: 1;
+        top: 0px;
+        right:  20px;
+    }
+    .liczba-pol-6 div:nth-child(3){
+        opacity: 1;
+        top: 34px;
+        left:  20px;
+    }
+    .liczba-pol-6 div:nth-child(4){
+        opacity: 1;
+        top: 34px;
+        right:  20px;
+    }
+    .liczba-pol-6 div:nth-child(5){
+        opacity: 1;
+        bottom: 10px;
+        left: 20px;
+    }
+    .liczba-pol-6 div:nth-child(6){
+        opacity: 1;
+        bottom: 10px;
+        right: 20px; 
+    }
+    /* tu sa ustawienia ogolne */
+    .klasaKostka div {
+        opacity: 0;
+        position: absolute;
+    }
+    .klasaKostka{
+        border: 1px solid black;
+        background-color: antiquewhite;
+        font-weight: 900;
+        font-size: 20px;
+        width: 100px;
+        height: 100px;
+        position: relative;
+        top: 100px;
+        box-sizing: border-box;
+    }
+    /* style do calego kontenera*/
+    #GRA {
+        position: absolute;
+        width: 800px;
+        height: 500px;
+        border: 3px dotted coral;
+        box-shadow: 20px 10px 10px rgb(241, 153, 121);
+    }
+        /* GRACZ 1 */
+    #gracz1-wrapper{
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        width: 350px;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        text-align: center;
+    }
+    #gracz1{
+        font-size: 50px;
+        position: relative;
+        top: 30px;
+    }
+    #gracz1-duze-punkty{
+        font-size: 40px;
+        position: relative;
+        top: 100px;
+    }
+    #gracz1-male-punkty-wrapper{
+        border: 2px dashed goldenrod;
+        font-size: 20px;
+        position: relative;
+        top: 220px;
+        width: 200px;
+        height: 100px;
+        left: 75px;
+    }
+    #gracz1-male-punkty{
+        font-size: 30px;
+        position: relative;
+        top: 41px;
+    }
+        /* GRACZ 2 */
+    #gracz2-wrapper{
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        width: 350px;
+        height: 100%;
+        top: -100%;
+        left: 450px;
+        text-align: center;
+    }
+    #gracz2{
+        font-size: 50px;
+        position: relative;
+        top: 30px;
+    }
+    #gracz2-duze-punkty{
+        font-size: 40px;
+        position: relative;
+        top: 100px;
+    }
+    #gracz2-male-punkty-wrapper{
+        border: 2px dashed goldenrod;
+        font-size: 20px;
+        position: relative;
+        top: 220px;
+        width: 200px;
+        height: 100px;
+        left: 75px;
+
+    }
+    #gracz2-male-punkty{
+        font-size: 30px;
+        position: relative;
+        top: 41px;
+    }
+    /* PRZYCISKI */
+    #przyciski-kontener{
+        width: 100px;
+        height: 100%;
+        box-sizing: border-box;
+        margin: 0px;
+        position: relative;
+        left: 350px;
+        top: -1000px;
+    }
+    #losuj-przycisk{
+        width: 100%;
+        height: 50px;
+        position: relative;
+        top: 140px;
+        border: none;
+        color: white;
+        background-color: rgba(240, 142, 191, 0.6);
+        box-shadow: 2px 2px hotpink;
+    }
+    #losuj-przycisk:hover {
+        background-color: rgba(240, 142, 191, 0.9);
+    }
+    #czekaj-przycisk{
+        width:100%;
+        height: 50px;
+        position: relative;
+        top: 180px;
+        border: none;
+        color: white;
+        background-color: rgba(240, 142, 191, 0.6);
+        box-shadow: 2px 2px hotpink;
+    }
+    #czekaj-przycisk:hover {
+        background-color: rgba(240, 142, 191, 0.9);
+    }
+    #reset-przycisk{
+        width:100%;
+        height: 50px;
+        position: relative;
+        top: 220px;
+        border: none;
+        color: white;
+        background-color: rgba(240, 142, 191, 0.6);
+        box-shadow: 2px 2px hotpink;
+    }
+    #reset-przycisk:hover {
+        background-color: rgba(240, 142, 191, 0.9);
+    }
+    .bold{
+        font-weight: 900;
+    }
+
+</style>
+
+</head>
+<body>
+
+<div id="GRA">
+    
+    <div id="gracz1-wrapper">
+        <div id="gracz1">GRACZ 1</div>
+        <div id="gracz1-duze-punkty">0 pkt</div>
+        <div id="gracz1-male-punkty-wrapper">
+            Aktualne:
+            <div id="gracz1-male-punkty">0 pkt</div>
+        </div>
+    </div>
+
+
+    <div id="gracz2-wrapper">
+        <div id="gracz2">GRACZ 2</div>
+        <div id="gracz2-duze-punkty">0 pkt</div>
+        <div id="gracz2-male-punkty-wrapper">
+            Aktualne:
+            <div id="gracz2-male-punkty">0 pkt</div>
+        </div>
+    </div>
+
+
+    <div id="przyciski-kontener">
+        <div id="kostka" class="klasaKostka">
+            <div>.</div>
+            <div>.</div>
+            <div>.</div>
+            <div>.</div>
+            <div>.</div>
+            <div>.</div>
+        </div>
+        <button id="losuj-przycisk">LOSUJ</button>
+        <button id="czekaj-przycisk">CZEKAJ</button>
+        <button id="reset-przycisk">RESET</button>
+    </div>
+    
+</div>
+    
+
+</body>
+</html>
+
+

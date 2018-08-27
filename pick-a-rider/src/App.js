@@ -8,7 +8,8 @@ class App extends Component {
   state = {
     yourRider : ''
   }
-  
+
+
   pickARiderHandler = () => {
     let riders = ['Andrea Dovizioso','Johann Zarco', 'Danilo Petrucci', 'Xavier Simeon',
       'Thomas Luthi','Karel Abraham','Alvaro Bautista', 'Franco Morbidelli',
